@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog de Química</title>
+<link rel="stylesheet" href="projeto.css">
+</head>
+<body>
+
+<header>
+<h1>Blog Educativo de Química</h1>
+<p>Autor: Luiz Heraldo Rodrigues Júnior</p>
+</header>
+
+<nav>
+<button onclick="mostrar('inicio')">Início</button>
+<button onclick="mostrar('atomos')">Relações Atômicas</button>
+<button onclick="mostrar('tabela')">Tabela Periódica</button>
+<button onclick="mostrar('ligacoes')">Ligações</button>
+<button onclick="mostrar('solubilidade')">Solubilidade</button>
+<button onclick="mostrar('solucoes')">Soluções</button>
+<button onclick="mostrar('concentracao')">Concentração</button>
+<button onclick="mostrar('dissociacao')">Dissociação</button>
+<button onclick="mostrar('acidos')">Ácidos e Bases</button>
+<button onclick="mostrar('neutralizacao')">Neutralização</button>
+<button onclick="mostrar('ph')">Calculadora pH</button>
+<button onclick="mostrar('titulacao')">Titulação</button>
+</nav>
+
+<section id="inicio" class="aba ativa">
+<h2>Bem-vindo</h2>
+<p>Site educativo de química desenvolvido com HTML, CSS e JavaScript.</p>
+</section>
+
+<section id="atomos" class="aba">
+<h2>Calculadora de Relações Atômicas</h2>
+<input type="number" id="z1" placeholder="Número Atômico 1">
+<input type="number" id="a1" placeholder="Número de Massa 1">
+<input type="number" id="c1" placeholder="Carga 1">
+<input type="number" id="z2" placeholder="Número Atômico 2">
+<input type="number" id="a2" placeholder="Número de Massa 2">
+<input type="number" id="c2" placeholder="Carga 2">
+<button onclick="verificarAtomos()">Calcular</button>
+<div class="resultado" id="resultadoAtomos"></div>
+</section>
+
+<section id="tabela" class="aba">
+<h2>Tabela Periódica</h2>
+<p>A tabela periódica foi criada por Dmitri Mendeleev em 1869. Atualmente os elementos são organizados em ordem crescente de número atômico.</p>
+<p>Famílias principais: alcalinos, alcalino-terrosos, calcogênios, halogênios e gases nobres.</p>
+<p>Propriedades periódicas: raio atômico, eletronegatividade, eletropositividade e energia de ionização.</p>
+<p><strong>Referência:</strong> FELTRE, Ricardo. Química.</p>
+</section>
+
+<section id="ligacoes" class="aba">
+<h2>Ligações Químicas e Polaridade</h2>
+<p>As ligações químicas podem ser iônicas, covalentes e metálicas.</p>
+<p>A polaridade depende da geometria molecular e da diferença de eletronegatividade.</p>
+<p><strong>Referência:</strong> PERUZZO, Tito. Química.</p>
+</section>
+
+<section id="solubilidade" class="aba">
+<h2>Solubilidade e Misturas</h2>
+<p>Misturas homogêneas possuem apenas uma fase. Misturas heterogêneas possuem duas ou mais fases.</p>
+<p>A solubilidade depende da temperatura, pressão e natureza química.</p>
+<p><strong>Referência:</strong> USBERCO, João. Química.</p>
+</section>
+
+<section id="solucoes" class="aba">
+<h2>Preparo de Soluções</h2>
+<p>Soluções são misturas homogêneas formadas por soluto e solvente.</p>
+<p>Tipos de concentração: comum, percentual e molar.</p>
+<p><strong>Referência:</strong> FELTRE, Ricardo. Química.</p>
+</section>
+
+<section id="concentracao" class="aba">
+<h2>Calculadora de Concentração</h2>
+<input type="number" id="massa" placeholder="Massa do soluto">
+<input type="number" id="volume" placeholder="Volume da solução">
+<input type="number" id="molar" placeholder="Massa molar">
+<button onclick="calcularConcentracao()">Calcular</button>
+<div class="resultado" id="resultadoConcentracao"></div>
+</section>
+
+<section id="dissociacao" class="aba">
+<h2>Dissociação da Água</h2>
+<p>A água sofre autoionização produzindo H+ e OH−.</p>
+<p>Kw = 1 × 10⁻¹⁴.</p>
+<p><strong>Referência:</strong> ATKINS, Peter.</p>
+</section>
+
+<section id="acidos" class="aba">
+<h2>Ácidos e Bases</h2>
+<p>Ácidos liberam H+ em solução aquosa e bases liberam OH−.</p>
+<p><strong>Referência:</strong> FELTRE, Ricardo.</p>
+</section>
+
+<section id="neutralizacao" class="aba">
+<h2>Neutralização e Titulação</h2>
+<p>Neutralização é a reação entre ácido e base formando sal e água.</p>
+<p><strong>Referência:</strong> USBERCO, João.</p>
+</section>
+
+<section id="ph" class="aba">
+<h2>Calculadora de pH</h2>
+<select id="tipo">
+<option value="acido">Ácido</option>
+<option value="base">Base</option>
+</select>
+<input type="number" id="conc" placeholder="Concentração">
+<select id="forca">
+<option value="1">Mono</option>
+<option value="2">Di</option>
+<option value="3">Tri</option>
+</select>
+<button onclick="calcularPH()">Calcular</button>
+<div class="resultado" id="resultadoPH"></div>
+</section>
+
+<section id="titulacao" class="aba">
+<h2>Calculadora de Titulação</h2>
+<input type="number" id="tc1" placeholder="Concentração 1">
+<input type="number" id="tv1" placeholder="Volume 1">
+<input type="number" id="tc2" placeholder="Concentração 2">
+<button onclick="calcularTitulacao()">Calcular</button>
+<div class="resultado" id="resultadoTitulacao"></div>
+</section>
+
+<script>
+function mostrar(id){
+document.querySelectorAll('.aba').forEach(sec=>sec.classList.remove('ativa'));
+document.getElementById(id).classList.add('ativa');
+}
+
+function verificarAtomos(){
+let z1=Number(document.getElementById('z1').value);
+let a1=Number(document.getElementById('a1').value);
+let c1=Number(document.getElementById('c1').value);
+let z2=Number(document.getElementById('z2').value);
+let a2=Number(document.getElementById('a2').value);
+let c2=Number(document.getElementById('c2').value);
+
+let n1=a1-z1;
+let n2=a2-z2;
+let e1=z1-c1;
+let e2=z2-c2;
+let r='';
+
+if(z1===z2 && a1!==a2) r+='São Isótopos<br>';
+if(n1===n2 && z1!==z2) r+='São Isótonos<br>';
+if(a1===a2 && z1!==z2) r+='São Isóbaros<br>';
+if(e1===e2) r+='São Isoeletrônicos<br>';
+if(r==='') r='Sem relação especial';
+
+document.getElementById('resultadoAtomos').innerHTML=r;
+}
+
+function calcularConcentracao(){
+let massa=Number(document.getElementById('massa').value);
+let volume=Number(document.getElementById('volume').value);
+let molar=Number(document.getElementById('molar').value);
+let comum=massa/volume;
+let titulo=(massa/(volume*1000))*100;
+let mol=(massa/molar)/volume;
+
+document.getElementById('resultadoConcentracao').innerHTML=
+`Concentração comum: ${comum.toFixed(2)} g/L <br>
+Título: ${titulo.toFixed(2)}% <br>
+Concentração molar: ${mol.toFixed(2)} mol/L`;
+}
+
+function calcularPH(){
+let tipo=document.getElementById('tipo').value;
+let conc=Number(document.getElementById('conc').value);
+let fator=Number(document.getElementById('forca').value);
+
+if(tipo==='acido'){
+let h=conc*fator;
+let ph=-Math.log10(h);
+document.getElementById('resultadoPH').innerHTML=`pH = ${ph.toFixed(2)}`;
+}else{
+let oh=conc*fator;
+let poh=-Math.log10(oh);
+let ph=14-poh;
+document.getElementById('resultadoPH').innerHTML=`pH = ${ph.toFixed(2)}`;
+}
+}
+
+function calcularTitulacao(){
+let c1=Number(document.getElementById('tc1').value);
+let v1=Number(document.getElementById('tv1').value);
+let c2=Number(document.getElementById('tc2').value);
+let v2=(c1*v1)/c2;
+document.getElementById('resultadoTitulacao').innerHTML=`Volume necessário: ${v2.toFixed(2)} mL`;
+}
+</script>
+
+</body>
+</html>
